@@ -14,7 +14,7 @@ use App\Http\Controllers\WebsiteController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('register',[UserController::class , 'register']);
+Route::get('register',[UserController::class , 'register'])->name('create-user');
 Route::post('add-user',[UserController::class , 'addUser'])->name('register');
 Route::get('login',[UserController::class , 'login'])->name('login');
 Route::post('sign-in',[UserController::class , 'loginUSer'])->name('sign-in');
