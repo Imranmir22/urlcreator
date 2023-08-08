@@ -45,7 +45,7 @@
                         <th scope="row">{{ $website->id }}</th>
                         <td>{{ $website->short_url }}</td>
                         <td class="">
-                            <a type="button" onclick="countClick('{{ $website->id }}')" href="{{ $website->long_url }}" target="_blank" id="url-counter" class="btn btn-primary" >Click</a>
+                            <a type="button" onclick="countClick('{{ $website->id }}')" href="{{route('access-url',$website->id)}}" target="_blank" id="url-counter" class="btn btn-primary" >Click</a>
                         </td>
                     </tr>
                 @endforeach
