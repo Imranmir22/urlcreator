@@ -5,9 +5,7 @@
         <button type="button" class="btn btn-primary modalshow" id="modalshow" data-toggle="modal" data-target="#exampleModalCenter">
         Create Short Url
         </button>
-        @if($errors->has('url'))
-            <div class="text-danger">{{ $errors->first('url') }}</div>
-        @endif
+       
         <div class="modal fade modalup" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -45,7 +43,7 @@
                         <th scope="row">{{ $website->id }}</th>
                         <td>{{ $website->short_url }}</td>
                         <td class="">
-                            <a type="button" onclick="countClick('{{ $website->id }}')" href="{{route('access-url',$website->id)}}" target="_blank" id="url-counter" class="btn btn-primary" >Click</a>
+                            <a type="button" onclick="countClick('{{ $website->id }}',event)" href="{{$website->short_url}}" target="_blank" id="url-counter" class="btn btn-primary" >Click</a>
                         </td>
                     </tr>
                 @endforeach
@@ -57,14 +55,22 @@
 @endsection
 @push('js')
 <script>
-   
-function countClick(id) {
+    window.onload = function () {
+        let urlval = "{{ $errors->first('url')}}";
+        if(urlval)
+        {
+            let modalshow = document.getElementById('modalshow');
+            modalshow.click();
+        }
+    }
+function countClick(id,e) {
+    e.preventDefault();
     $.ajax({
         'type':'GET',
         url:"{{ route('count-clicks') }}",
         data:`id=${id}`,
         success:function(data) {
-            $("#msg").html(data.msg);
+            window.open(data,"_blank");
         }
     });
 }

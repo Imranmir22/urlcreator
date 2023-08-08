@@ -36,5 +36,6 @@ class WebsiteController extends Controller
         $website = Website::find($id);
         $website->total_clicks = $website->total_clicks + 1;
         $website->save();
+        return $website->long_url;
     }
 }

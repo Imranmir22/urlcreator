@@ -25,6 +25,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard',[UserController::class , 'dashboard']);
     Route::post('add-url',[WebsiteController::class , 'addUrl'])->name('add-url');
     Route::get('count-clicks',[WebsiteController::class , 'countClick'])->name('count-clicks');
+    // Route::get('access-url/{id}',[WebsiteController::class , 'redirectTo'])->name('access-url');
        
 });
 
