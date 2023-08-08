@@ -13,9 +13,14 @@ class WebsiteController extends Controller
         $request->validate(
             [
                 'url'=>'required|url'
+            ],
+            [
+                'url.url'=>'Invalid url , valid url format is https://www.example.com'
             ]
         );
-        $shortUrl = Str::random(6);
+        $maxId = Website::max('id');
+        
+        $shortUrl = Str::random(6).$maxId;
         Website::create(
         [
             'user_id'=>Auth::id(),

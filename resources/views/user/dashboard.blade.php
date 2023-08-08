@@ -2,10 +2,13 @@
 @section('content')
 
     <div class="container mt-5">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        <button type="button" class="btn btn-primary modalshow" id="modalshow" data-toggle="modal" data-target="#exampleModalCenter">
         Create Short Url
         </button>
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        @if($errors->has('url'))
+            <div class="text-danger">{{ $errors->first('url') }}</div>
+        @endif
+        <div class="modal fade modalup" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
             <form method="POST" action="{{ route('add-url') }}">
@@ -13,10 +16,14 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="url">Enter Url</label>
-                            <input type="text" class="form-control" id="url" name="url" placeholder="Enter Url" required>
+                            <input type="text" class="form-control" id="url" name="url" placeholder="https://www.example.com" required>
                         </div>
                     </div>
+                    @if($errors->has('url'))
+                        <div class="text-danger">{{ $errors->first('url') }}</div>
+                    @endif
                     <div class="modal-footer">
+                    
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
@@ -50,7 +57,7 @@
 @endsection
 @push('js')
 <script>
-
+   
 function countClick(id) {
     $.ajax({
         'type':'GET',
